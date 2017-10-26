@@ -6,10 +6,7 @@ type gameboard struct {
 	TRow [3]int
 }
 
-func Board() {
 
-}
-
-func updatemap(action int) {
+func UpdateBoard(action int) {
 
 }
