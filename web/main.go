@@ -1,28 +1,28 @@
 package web
 
 import (
-	"net"
 	"bufio"
 	"log"
+	"net"
 )
 
 type request struct {
-	Key string
+	Key         string
 	MatchString string
-	Row int
-	Col int
+	Row         int
+	Col         int
 }
 
 func StartServer() {
 
-	server, err := new.Listen("tcp", ":" + "2556")
+	server, err := new.Listen("tcp", ":"+"2556")
 	if err != nil {
 		log.Fatal("couldn't start server: " + err.String())
 	}
 
 	conn, err := clientConns(server)
 
-	if (err != nil) {
+	if err != nil {
 		log.Fatal(err)
 	}
 	conns := clientConns(server)
@@ -30,11 +30,10 @@ func StartServer() {
 	for {
 		go handleConn(<-conns)
 
-
 	}
 }
 
-clientConns(listener net.Listener) chan net.Conn {
+func clientConns(listener net.Listener) chan net.Conn {
 	ch := make(chan net.Conn)
 	i := 0
 
@@ -47,7 +46,7 @@ clientConns(listener net.Listener) chan net.Conn {
 			}
 			i++
 			mt.Printf("%d: %v <-> %v\n", i, client.LocalAddr(), client.RemoteAddr())
-			ch <-client
+			ch <- client
 		}
 	}()
 	return ch
@@ -61,5 +60,5 @@ func handleConn(client net.Conn) {
 			break
 		}
 		client.Write(line)
-	{
 	}
+}
