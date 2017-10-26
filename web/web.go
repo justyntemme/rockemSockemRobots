@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"log"
 	"net"
+	"fmt"
 )
 
 type request struct {
@@ -15,12 +16,12 @@ type request struct {
 
 func StartServer() {
 
-	server, err := new.Listen("tcp", ":"+"2556")
+	server, err := net.Listen("tcp", ":"+"2556")
 	if err != nil {
-		log.Fatal("couldn't start server: " + err.String())
+		log.Fatal(err)
 	}
 
-	conn, err := clientConns(server)
+	conn := clientConns(server)
 
 	if err != nil {
 		log.Fatal(err)
@@ -41,11 +42,11 @@ func clientConns(listener net.Listener) chan net.Conn {
 		for {
 			client, err := listener.Accept()
 			if err != nil {
-				fmt.Println("couldn't accept: " + err.String())
+				fmt.Println("couldn't accept: " + err.Error())
 				continue
 			}
 			i++
-			mt.Printf("%d: %v <-> %v\n", i, client.LocalAddr(), client.RemoteAddr())
+			fmt.Printf("%d: %v <-> %v\n", i, client.LocalAddr(), client.RemoteAddr())
 			ch <- client
 		}
 	}()
