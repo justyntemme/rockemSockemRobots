@@ -24,6 +24,7 @@ type gameboard struct {
 	SRow [3]int
 	TRow [3]int
 
+	//1 = player1, 2= player2
 	currentTurn int
 }
 
