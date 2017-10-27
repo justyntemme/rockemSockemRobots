@@ -2,9 +2,9 @@ package web
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"net"
-	"fmt"
 )
 
 type request struct {
@@ -21,8 +21,6 @@ func StartServer() {
 		log.Fatal(err)
 	}
 
-	conn := clientConns(server)
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -32,6 +30,7 @@ func StartServer() {
 		go handleConn(<-conns)
 
 	}
+
 }
 
 func clientConns(listener net.Listener) chan net.Conn {
