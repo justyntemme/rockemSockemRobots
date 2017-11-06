@@ -24,10 +24,7 @@ type gameboard struct {
 
 
 	*/
-	FRow [3]int
-	SRow [3]int
-	TRow [3]int
-
+	board [9]int
 	//1 = player1, 2= player2
 	currentTurn int
 }
@@ -38,9 +35,6 @@ func UpdateBoard(action int, player int, gamekey string) string {
 	switch action {
 	case 1:
 		{
-			if ActiveGameBoard.FRow[0] != 0 {
-				return "Error: Spot Taken"
-			}
 
 		}
 	}
