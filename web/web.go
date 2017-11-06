@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"log"
 	"net"
+
+	"github.com/justyntemme/rockemsockemrobots/gameboard"
 )
 
 type request struct {
@@ -75,6 +77,7 @@ func parseRequest(jsonRequst []byte) string {
 	if err != nil {
 		return ("500 " + err.Error())
 	}
+	player := gameboard.VerifyRequest(r)
 	return ("200")
 
 }
