@@ -7,11 +7,11 @@ var games Allgames
 type request struct {
 	Key         string
 	MatchString string
-	Row         int
-	Col         int
+	Position    int
 }
 
 type Allgames struct {
+	//TODO: rename, smh
 	games map[string]gameboard
 }
 
@@ -29,13 +29,19 @@ type gameboard struct {
 	currentTurn int
 }
 
+//TODO update current player after update board
 func UpdateBoard(action int, player int, gamekey string) string {
 	ActiveGameBoard := games.games[gamekey]
+	if player != games.games[gamekey].currentTurn {
+		return "Error: Not your turn"
+	}
 
 	switch action {
 	case 1:
 		{
-
+			if ActiveGameBoard.board[action] > 0 {
+				return "Error: position already taken"
+			}
 		}
 	}
 
