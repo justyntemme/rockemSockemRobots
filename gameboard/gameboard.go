@@ -11,6 +11,10 @@ type request struct {
 	Col         int
 }
 
+type Allgames struct {
+	games map[string]gameboard
+}
+
 type gameboard struct {
 	/*
 		1,2,3
@@ -26,10 +30,6 @@ type gameboard struct {
 
 	//1 = player1, 2= player2
 	currentTurn int
-}
-
-type Allgames struct {
-	games map[string]gameboard
 }
 
 func UpdateBoard(action int, player int, gamekey string) string {

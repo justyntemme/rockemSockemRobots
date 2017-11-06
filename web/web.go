@@ -2,6 +2,7 @@ package web
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net"
@@ -57,8 +58,23 @@ func handleConn(client net.Conn) {
 	for {
 		line, err := b.ReadBytes('\n')
 		if err != nil {
+			client.Write([]byte("500"))
 			break
 		}
-		client.Write(line)
+		if err == nil {
+			parseErr := parseRequest(line)
+			client.Write([]byte(parseErr))
+		}
+
 	}
+}
+
+func parseRequest(jsonRequst []byte) string {
+	r := new(request)
+	err := json.Unmarshal(jsonRequst, &r)
+	if err != nil {
+		return ("500 " + err.Error())
+	}
+	return ("200")
+
 }
