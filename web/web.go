@@ -17,7 +17,7 @@ type request struct {
 
 func StartServer() {
 
-	server, err := net.Listen("tcp", ":"+"2556")
+	server, err := net.Listen("tcp", ":"+"25566")
 	if err != nil {
 		log.Fatal(err)
 	}
