@@ -12,6 +12,7 @@ import (
 
 type request struct {
 	Key         string
+	joinGame	bool
 	MatchString string
 	Row         int
 	Col         int
