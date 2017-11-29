@@ -5,6 +5,7 @@ var mScroll map[string][]string
 var games Allgames
 
 type request struct {
+	joinGame	bool
 	Key         string
 	MatchString string
 	Position    int
@@ -51,6 +52,16 @@ func UpdateBoard(action int, player int, gamekey string) string {
 
 func VerifyRequest(req request) string {
 	var player = 0
+	if req.joinGame = true {
+		mScroll[req.MatchString][1] = req.Key
+		return("2001: you are player 2, game..... BEGAIN!")
+	}
+	if mScroll[req.MatchString][0] == nil {
+		player = 1
+		mScroll[req.MatchString[0] = req.Key
+		return("2000: You are player one, waiting for opponent")
+	}
+
 	if mScroll[req.MatchString][0] == req.Key {
 		player = 1
 	} else if mScroll[req.MatchString][1] == req.Key {
